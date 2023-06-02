@@ -12,31 +12,6 @@ permissions:
   contents: read # to fetch code (actions/checkout)
 
 jobs:
-  build:
-
-    runs-on: debian-latest
-    strategy:
-      matrix:
-        java: [ '17', '20' ]
-
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: ${{ matrix.java }}
-          cache: 'gradle'
-      - name: Build with Gradle
-        run: ./gradlew --no-daemon build
-      - name: Compress archive
-        run: gzip -n -9 build/distributions/signal-cli-*.tar
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: signal-cli-archive-${{ matrix.java }}
-          path: build/distributions/signal-cli-*.tar.gz
-
   build-graalvm:
 
     runs-on: debian-latest
