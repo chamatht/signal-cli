@@ -13,7 +13,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
     strategy:
       matrix:
         java: [ '17', '20' ]
@@ -38,7 +38,7 @@ jobs:
 
   build-graalvm:
 
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
 
     steps:
       - uses: actions/checkout@v3
